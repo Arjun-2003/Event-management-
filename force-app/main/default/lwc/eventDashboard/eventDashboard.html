@@ -1,0 +1,18 @@
+<template>
+    <div class="main">
+        <div class="input">
+            <h1>Upcoming Events</h1> <input class="input25" type="text" placeholder="Search Events..." oninput={getInputValue}>
+        </div>
+        <div class="filter">
+            <h2>Filter by:</h2><lightning-combobox value={value} options={options} onchange={handleChange}></lightning-combobox>
+        </div>
+        <div class="eventlist" if:true={allEvent}>
+            <template for:each={allEvent} for:item="eventObj">
+            <div class="list" key={eventObj.Id}>
+            <p class="eventname">{eventObj.Name}</p>
+            <p class="eventInfo"><span class="eventtime">{eventObj.formattedDate}</span> <span class="eventtype">{eventObj.Event_Type__c}</span> <span class="eventlocation">{eventObj.Location__c}</span></p>
+           </div>
+           </template>
+        </div>
+    </div>
+</template>

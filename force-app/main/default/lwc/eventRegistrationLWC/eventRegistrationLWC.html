@@ -1,0 +1,14 @@
+<template>
+    <div class="main">
+         <div class="btns">
+            <template if:true={dataload}><div class="loader6"></div></template>
+            <div class="trueBtn" if:true={register}><button class="button button5" onclick={cancelRegistrationEvent}>Cancel Registration</button><p>You are already registered for this event</p> </div>
+            <div class="trueBtn" if:false={register}><button class="button button1" onclick={showform}>Registration</button><p>You can register for this event</p> </div>
+         </div>
+         <div class="allregisterdevent" if:true={allRegisterdEvent}>
+            <template for:each={allRegisterdEvent} for:item="regEvent">
+                <c-event-registration key={regEvent.Id} name={regEvent.Event__r.Name} date={regEvent.Event__r.Event_date__c} eventregid={regEvent.Id} location={regEvent.Event__r.Location__c} ></c-event-registration>
+            </template>
+         </div>
+    </div>
+</template>
