@@ -7,8 +7,10 @@ import updateEvent from "@salesforce/apex/EventController.updateEvent";
 import relatedRecords from "@salesforce/apex/EventController.relatedRecords";
 import { subscribe, onError } from 'lightning/empApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import deleteEventRegisterdRecord from '@salesforce/apex/EventController.deleteEventRegisterdRecord';
 export default class EventDashboard extends LightningElement {
   allEvent;
+  currentSelectedEventId ;
   filterValue = '';
   inputValue = '';
    channelName = '/event/System_Notification__e';
@@ -37,6 +39,30 @@ export default class EventDashboard extends LightningElement {
         });
     
   }
+
+Registerdeventdelete(e){
+  let rEventId = e.target.getAttribute('registerdevent');
+  deleteEventRegisterdRecord({eventId : rEventId}).then((res)=>{
+    if (res == 'deleted') {
+      relatedRecords({ eventId: this.currentSelectedEventId })
+        .then((res) => {
+          if (res.length > 0 && res[0].Event_Registration__r) {
+            this.relatedRecoedList = res[0].Event_Registration__r;
+            this.showRelatedrecord = true;
+          } else {
+            this.relatedRecoedList = [];
+            this.showRelatedrecord = false;
+          }
+        })
+        .catch((err) => {
+          console.log('err=>', err);
+        });
+    }
+  })
+  
+}
+
+
   closeeventform(e) {
     this.showcreateform = false
   }
@@ -66,6 +92,7 @@ export default class EventDashboard extends LightningElement {
   }
   showRelatedRegisterdEvent(e) {
     let evntID = e.target.getAttribute('currentevemtid');
+    this.currentSelectedEventId = evntID;
     relatedRecords({ eventId: evntID })
     .then((res) => {
       if (res.length > 0 && res[0].Event_Registration__r) {

@@ -219,7 +219,21 @@
      background: #78C8E6;
      color: #000;
   }
-
+  .infoanddelete{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+.deleteRegisterdevent{
+  padding: 0.2rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 0.3rem;
+  background: #ffffff;
+  color: #000000;
+  font-size: 1.1rem;
+}
 .upperEditform{
  width: 100%;
  height: fit-content;

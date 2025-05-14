@@ -17,7 +17,7 @@
                         <p class="eventInfo" eventid={eventObj.Id}><span
                                 class="eventtime">{eventObj.formattedDate}</span> <span
                                 class="eventtype">{eventObj.Event_Type__c}</span> <span
-                                class="eventlocation">{eventObj.Location__c}</span> <button currentevemtid={eventObj.Id} class="button button1 view" onclick={showRelatedRegisterdEvent}>View Registration</button> <button  class="button button1 view" onclick={editevent} eventid={eventObj.Id} >Edit</button> <button  class="deletebtnn button button1 view"  eventid={eventObj.Id} onclick={deleteEvent}>Delete</button> </p>
+                                class="eventlocation">{eventObj.Location__c}</span> <template if:true={admin}><button currentevemtid={eventObj.Id} class="button button1 view" onclick={showRelatedRegisterdEvent}>View Registration</button> <button  class="button button1 view" onclick={editevent} eventid={eventObj.Id} >Edit</button> <button  class="deletebtnn button button1 view"  eventid={eventObj.Id} onclick={deleteEvent}>Delete</button></template> </p>
                     </div>
                 </div>
             </template>
@@ -36,7 +36,7 @@
     <template for:each={relatedRecoedList} for:item="recordObj">
      <div class="onelist" key={recordObj.Id}>
                     <h2>{recordObj.Name}</h2>
-                    <p class="eventRegInfo"><span>{recordObj.Registered_On__c}</span> <span>{recordObj.Status__c}</span></p>
+                    <div class="infoanddelete"><p class="eventRegInfo"><span>{recordObj.Registered_On__c}</span> <span>{recordObj.Status__c}</span></p> <button class="deleteRegisterdevent" onclick={Registerdeventdelete} registerdevent={recordObj.Id}>Delete</button> </div>
                     </div>
     </template>                    
 
