@@ -1,18 +1,101 @@
 <template>
     <div class="main">
         <div class="input">
-            <h1>Upcoming Events</h1> <input class="input25" type="text" placeholder="Search Events..." oninput={getInputValue}>
+            <div class="upcomingandcreate">
+                <h1>Upcoming Events</h1> <button class="button button1" onclick={showform}>Create Event</button>
+            </div> <input class="input25" type="text" placeholder="Search Events..." oninput={getInputValue}>
         </div>
         <div class="filter">
-            <h2>Filter by:</h2><lightning-combobox value={value} options={options} onchange={handleChange}></lightning-combobox>
+            <h2>Filter by:</h2><lightning-combobox value={value} options={options}
+                onchange={handleChange}></lightning-combobox>
         </div>
         <div class="eventlist" if:true={allEvent}>
             <template for:each={allEvent} for:item="eventObj">
-            <div class="list" key={eventObj.Id}>
-            <p class="eventname">{eventObj.Name}</p>
-            <p class="eventInfo"><span class="eventtime">{eventObj.formattedDate}</span> <span class="eventtype">{eventObj.Event_Type__c}</span> <span class="eventlocation">{eventObj.Location__c}</span></p>
-           </div>
-           </template>
+                <div class="list" key={eventObj.Id}>
+                    <p class="eventname">{eventObj.Name}</p>
+                    <div class="eventinfoandbtns">
+                        <p class="eventInfo" eventid={eventObj.Id}><span
+                                class="eventtime">{eventObj.formattedDate}</span> <span
+                                class="eventtype">{eventObj.Event_Type__c}</span> <span
+                                class="eventlocation">{eventObj.Location__c}</span> <button currentevemtid={eventObj.Id} class="button button1 view" onclick={showRelatedRegisterdEvent}>View Registration</button> <button  class="button button1 view" onclick={editevent} eventid={eventObj.Id} >Edit</button> <button  class="deletebtnn button button1 view"  eventid={eventObj.Id} onclick={deleteEvent}>Delete</button> </p>
+                    </div>
+                </div>
+            </template>
         </div>
+
+        <template if:true={showRelatedrecord}>
+           <template if:true={relatedRecoedList}>
+             <div class="showcreateform extra">
+                <div class="closebtn">
+                    <h2>Show Related Registered Event</h2><span style="margin-bottom: 0.5rem;"
+                        onclick={closeRelatiddev}>×</span>
+                </div>
+                
+                <div class="relatedlists" if:true={relatedRecoedList}>
+
+    <template for:each={relatedRecoedList} for:item="recordObj">
+     <div class="onelist" key={recordObj.Id}>
+                    <h2>{recordObj.Name}</h2>
+                    <p class="eventRegInfo"><span>{recordObj.Registered_On__c}</span> <span>{recordObj.Status__c}</span></p>
+                    </div>
+    </template>                    
+
+
+                </div>
+            </div>
+           </template>
+        </template>
+
+
+        <template if:true={showcreateform}>
+            <div class="showcreateform">
+                <lightning-card class="pading">
+                    <div class="closebtn">
+                        <h2>Create Event form</h2><span style="margin-bottom: 0.5rem;" onclick={closeeventform}>×</span>
+                    </div>
+                    <lightning-record-edit-form object-api-name="Event__c" density="Compact" onsuccess={hendelSuccess}
+                        onerror={hendelerr}>
+                        <lightning-input-field field-name="Name"></lightning-input-field>
+                        <lightning-input-field field-name="Event_Type__c"></lightning-input-field>
+                        <lightning-input-field field-name="Location__c"></lightning-input-field>
+                        <lightning-input-field field-name="Max_Attendees__c"></lightning-input-field>
+                        <lightning-input-field field-name="Created_By_User__c"></lightning-input-field>
+                        <lightning-input-field field-name="Event_date__c"></lightning-input-field>
+                        <lightning-button variant="brand" label="Submit" type="submit"></lightning-button>
+                    </lightning-record-edit-form>
+                </lightning-card>
+            </div>
+
+        </template>
+
+
+
+        <template if:true={showModal}>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+            <section class="slds-modal slds-fade-in-open" role="dialog">
+                <div class="slds-modal__container">
+                    <header class="slds-modal__header">
+                        <h2 class="slds-text-heading_medium">Edit Event</h2>
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium">
+                        <lightning-input label="Name" value={editEvent.Name} onchange={handleEditChange}
+                            data-field="Name"></lightning-input>
+                        <lightning-input label="Location" value={editEvent.Location__c} onchange={handleEditChange}
+                            data-field="Location__c"></lightning-input>
+                        <lightning-input label="Max Attendees" type="number" value={editEvent.Max_Attendees__c}
+                            onchange={handleEditChange} data-field="Max_Attendees__c"></lightning-input>
+                        <lightning-combobox label="Event Type" value={editEvent.Event_Type__c} options={options}
+                            onchange={handleEditChange} data-field="Event_Type__c"></lightning-combobox>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <lightning-button label="Cancel" onclick={closeModal}></lightning-button>
+                        <lightning-button variant="brand" label="Save" onclick={updateEventInDb}></lightning-button>
+                    </footer>
+                </div>
+            </section>
+        </template>
+
+
+
     </div>
 </template>

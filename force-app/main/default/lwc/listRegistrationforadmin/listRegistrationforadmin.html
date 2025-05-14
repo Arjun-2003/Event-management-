@@ -1,0 +1,15 @@
+<template>
+    <div class="main">
+        <div class="eventlist" if:true={admin}>
+            <h1 class="all">All Registered Event</h1>
+           <template if:true={allRegisterdEvent}>
+             <template for:each={allRegisterdEvent} for:item="allRegisterdEvent">
+            <div class="list" key={allRegisterdEvent.Id}>
+            <p class="eventname">{allRegisterdEvent.Name}</p>
+           <div class="eventinfoandbtns"><p class="eventInfo"><span class="eventtime">{allRegisterdEvent.Event__r.Name}</span> <span class="eventtype">{allRegisterdEvent.Registered_On__c}</span> <span class="eventlocation">{allRegisterdEvent.Status__c}</span> </p></div> 
+           </div>
+           </template>
+           </template>
+        </div>
+    </div>
+</template>

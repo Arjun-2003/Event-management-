@@ -11,6 +11,7 @@
     color: #000;
     border-radius: 0.2rem;
     padding: 0.3rem 0.7rem;
+    position: relative;
 }
 .input{
     display: flex;
@@ -37,10 +38,86 @@
     border-radius: 0.3rem;
   }
   .input25:focus {
-    width: 60%;
+    width: 30%;
     /* border: 2.5px solid #000000; */
     box-shadow: none;
   }
+ 
+.showcreateform{
+  width: 70vw;
+  height: 25rem;
+  /* border: 3px solid #1b0101; */
+  border-radius: 0.5rem;
+  position: fixed;       
+  left: 50%;
+  z-index: 9;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
+}
+.view {
+  padding: 5px 10px !important;
+}
+
+.extra{
+  background-color: #00A1E0;
+  min-height: 30rem;
+  overflow: scroll;
+  top: 55%;
+  color: #ffffff;
+}
+.relatedlists{
+  width: 100%;
+  height: fit-content;
+}
+.onelist{
+  width: 100%;
+  min-height: 5rem;
+  border-bottom: 1.2px solid #fff;
+  border-top: 1.2px solid #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.2rem;
+}
+.onelist h2{
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  padding: 0 0.5rem;
+
+}
+.eventRegInfo{
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 0.8rem;
+  align-items: center;
+  padding: 0 0.5rem;
+  font-size: 1.1rem;
+  text-transform: capitalize;
+}
+.closebtn{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+.closebtn h2{
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.closebtn span{
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 0.2rem;
+  cursor: pointer;
+}
+
 
   .filter{
     display: flex;
@@ -63,6 +140,44 @@
     gap: 1rem;
     margin-top: 1.2rem;
   }
+  .upcomingandcreate{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .button {
+  border: none;
+  padding: 5px 30px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: 500;
+  border-radius: 0.3rem;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.button1 {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #00A1E0;
+}
+
+.button1:hover {
+  background-color: #00A1E0;
+  color: white;
+}
+
+  .eventinfoandbtns{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 3rem;
+  }
   .list{
     width: 100%;
     display: flex;
@@ -70,6 +185,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     gap: 0.2rem;
+    cursor: pointer;
     border-top: 1.2px solid #00000056;
     border-bottom: 1.2px solid #0000005b;
   }
@@ -82,6 +198,38 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    flex-wrap: wrap;
     gap: 1rem;
     font-size: 1.1rem; 
+    position: relative;
   }
+
+  .btns{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.2rem;
+  }
+  .btns button{
+     padding: 0.2rem 0.5rem;
+     border: none;
+     outline: none;
+     border-radius: 0.3rem;
+     background: #78C8E6;
+     color: #000;
+  }
+
+.upperEditform{
+ width: 100%;
+ height: fit-content;
+ position: absolute;
+ left: 50%;
+ top: 50%;
+ transform: translate(-50%,-50%);
+ padding: 0.2rem 0.7rem;
+}
+
+
+
+

@@ -35,7 +35,7 @@ export default class EventRegistrationLWC extends LightningElement {
     })
  }
  showform(e){
-    console.log('show');
+ 
     this.userInfo[0].Name;
    eventRegistration({
     Name: this.userInfo[0].Name,
@@ -93,11 +93,7 @@ cancelRegistrationEvent(e){
     console.error('Error in Cancel:', err);
     alert('Cancel Unsuccessful');
 });
-
-
-
-
-
+}
 }
 
-}
+
